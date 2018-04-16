@@ -529,7 +529,7 @@
          * Remove when clicked outside dropdown
          */
         document.addEventListener("click", function (event) {
-            if (!getClosest(event.target, "."+settings.navDropdownClassName) && event.target !== _this.querySelector(navDropdownToggle)) {
+            if (!getClosest(event.target, "."+settings.navDropdownClassName) && event.target !== _this.querySelector(navDropdownToggle) && event.target.parentNode !== _this.querySelector(navDropdownToggle)) {
                 _this.querySelector(navDropdown).classList.remove("show");
                 _this.querySelector(navDropdownToggle).classList.remove("is-open");
                 _this.classList.remove("is-open");
