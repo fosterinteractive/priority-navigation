@@ -81,12 +81,15 @@
      * @param {String} selector Selector to match against (class, ID, or data attribute)
      * @return {Boolean|Element} Returns false if not match found
      */
-    var getClosest = function (elem, selector) {
+    var getClosest = function (elem, selector, btnSelector) {
         var firstChar = selector.charAt(0);
         for (; elem && elem !== document; elem = elem.parentNode) {
             if (firstChar === ".") {
                 if (elem.classList.contains(selector.substr(1))) {
                     return elem;
+                }
+                else if (elem.classList.contains(btnSelector.substr(1))) {
+                  return false;
                 }
             } else if (firstChar === "#") {
                 if (elem.id === selector.substr(1)) {
@@ -510,7 +513,9 @@
 
         // Toggle dropdown
         _this.querySelector(navDropdownToggle).addEventListener("click", function () {
+            // console.log(_this.querySelector(navDropdown));
             toggleClass(_this.querySelector(navDropdown), "show");
+            // console.log(_this.querySelector(navDropdown));
             toggleClass(this, "is-open");
             toggleClass(_this, "is-open");
 
@@ -529,7 +534,8 @@
          * Remove when clicked outside dropdown
          */
         document.addEventListener("click", function (event) {
-            if (!getClosest(event.target, "."+settings.navDropdownClassName) && event.target !== _this.querySelector(navDropdownToggle) && event.target.parentNode !== _this.querySelector(navDropdownToggle)) {
+          console.log(getClosest(event.target, "."+settings.navDropdownClassName));
+            if (!getClosest(event.target, "."+settings.navDropdownClassName, "."+settings.navDropdownToggleClassName) && event.target !== _this.querySelector(navDropdownToggle)) {
                 _this.querySelector(navDropdown).classList.remove("show");
                 _this.querySelector(navDropdownToggle).classList.remove("is-open");
                 _this.classList.remove("is-open");
