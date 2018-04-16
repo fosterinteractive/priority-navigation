@@ -89,7 +89,7 @@
                     return elem;
                 }
                 else if (elem.classList.contains(btnSelector.substr(1))) {
-                  return false;
+                    return elem;
                 }
             } else if (firstChar === "#") {
                 if (elem.id === selector.substr(1)) {
@@ -513,9 +513,7 @@
 
         // Toggle dropdown
         _this.querySelector(navDropdownToggle).addEventListener("click", function () {
-            // console.log(_this.querySelector(navDropdown));
             toggleClass(_this.querySelector(navDropdown), "show");
-            // console.log(_this.querySelector(navDropdown));
             toggleClass(this, "is-open");
             toggleClass(_this, "is-open");
 
@@ -534,7 +532,6 @@
          * Remove when clicked outside dropdown
          */
         document.addEventListener("click", function (event) {
-          console.log(getClosest(event.target, "."+settings.navDropdownClassName));
             if (!getClosest(event.target, "."+settings.navDropdownClassName, "."+settings.navDropdownToggleClassName) && event.target !== _this.querySelector(navDropdownToggle)) {
                 _this.querySelector(navDropdown).classList.remove("show");
                 _this.querySelector(navDropdownToggle).classList.remove("is-open");
